@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getVideoSource } from '../actions';
-import '../assets/styles/components/Player.scss';
-import NotFound from '../containers/NotFound';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getVideoSource } from "../actions";
+import "../assets/styles/components/Player.scss";
+import NotFound from "../containers/NotFound";
 
-const Player = props => {
+const Player = (props) => {
   const { id } = props.match.params;
-  const hasPlaying = Object.keys(props.playing).length > 0;
   useEffect(() => {
     props.getVideoSource(id);
   }, []);
+  console.log(hasPlaying);
+  const hasPlaying = props.playing ? true : false;
+  console.log(hasPlaying);
   return hasPlaying ? (
     <div className="Player">
       <video controls autoPlay>
@@ -21,17 +23,19 @@ const Player = props => {
         </button>
       </div>
     </div>
-  ) : <NotFound />;
+  ) : (
+    <NotFound />
+  );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     playing: state.playing,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
-  getVideoSource, 
-}
+  getVideoSource,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

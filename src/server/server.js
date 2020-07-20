@@ -49,24 +49,23 @@ if (ENV === "development") {
 
 const setResponse = (html, preloadedState) => {
   return `<!DOCTYPE html>
-    <html>
-      <head>
-        <link href='assets/app.css' rel='stylesheet' type='text/css'>
-        <title>Platzi Video</title>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script>
+  <html>
+    <head>
+      <link href="/assets/app.css" rel="stylesheet" type="text/css" />
+      <title>Platzi Video</title>
+    </head>
+    <body>
+      <div id="app">${html}</div>
+      <script>
 
         window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
           /</g,
           "\\u003c"
         )}
-
-        </script>
-        <script type='text/javascript' src='assets/app.js'></script>
-      </body>
-    </html>`;
+      </script>
+      <script type="text/javascript" src="/assets/app.js"></script>
+    </body>
+  </html>`;
 };
 const renderApp = async (req, res) => {
   let initialState;
